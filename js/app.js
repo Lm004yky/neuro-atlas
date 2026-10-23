@@ -30,8 +30,42 @@
   const ordered = () => NA.levels.flatMap(l => ready().filter(x => x.level === l.id));
 
   /* Где тема «живёт» в мозге — точки на схеме главной (координаты в системе viewBox 40 40 520 380) */
-  const SPOTS = { atlas: [165, 150], neuron: [345, 120], synapse: [395, 160], hearing: [300, 222], vestibular: [462, 300],
-    vision: [500, 205], touch: [287, 95], movement: [258, 95], memory: [345, 262], emotion: [282, 258], sleep: [358, 350], glia: [215, 195] };
+  const SPOTS = { atlas: [160, 150], neuron: [385, 100], synapse: [430, 150], hearing: [312, 246], vestibular: [490, 312],
+    vision: [522, 196], touch: [322, 92], movement: [280, 92], memory: [365, 282], emotion: [285, 284], sleep: [375, 372], glia: [205, 205] };
+  /* Мозг сбоку (левое полушарие, лоб слева). Доли — цветные области, обрезанные силуэтом коры */
+  const CORTEX = "M70,230 C58,150 120,70 230,50 C330,34 452,58 512,118 C556,163 562,228 532,266 C512,290 472,292 442,282 C412,314 342,330 272,322 C212,316 172,302 152,284 C140,272 150,258 172,254 C150,262 96,262 70,230 Z";
+  const SULCI = [
+    "M172,254 C240,232 320,222 395,205 C405,200 410,190 413,180",
+    "M302,44 C290,88 302,120 282,150 C270,175 264,200 259,228",
+    "M264,50 C252,92 260,124 240,158 C230,178 228,198 224,236",
+    "M340,48 C330,92 342,124 322,158 C314,178 310,198 307,220",
+    "M108,138 C150,126 190,140 240,116", "M94,190 C140,176 186,196 230,180", "M120,232 C150,220 180,226 214,212",
+    "M332,140 C372,128 402,150 452,138 C476,134 496,148 506,170",
+    "M372,176 C392,170 404,184 424,180", "M484,104 C470,140 494,170 482,204",
+    "M470,232 C494,242 514,236 536,224", "M206,282 C262,262 330,256 422,238", "M234,306 C292,296 352,292 432,268",
+    "M140,92 C160,104 182,96 200,84", "M402,92 C420,100 436,92 456,98"
+  ];
+  const brainSVG = () => {
+    const folia = [...Array(7)].map((_, i) => `<path d="M${424 + i * 3},${290 + i * 9} C${464 + i},${280 + i * 9} ${518 - i * 3},${280 + i * 9} ${554 - i * 6},${292 + i * 8}"/>`).join("");
+    return `<defs>
+      <radialGradient id="tissueG" cx="38%" cy="30%" r="80%"><stop offset="0" stop-color="color-mix(in srgb,var(--tissue-2) 70%,var(--surface))"/><stop offset="1" stop-color="var(--tissue)"/></radialGradient>
+      <clipPath id="cxClip"><path d="${CORTEX}"/></clipPath>
+      <filter id="soft" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000" flood-opacity=".28"/></filter></defs>
+      <g filter="url(#soft)">
+        <path class="b-cer" d="M416,290 C436,258 520,252 550,282 C572,312 544,354 488,356 C440,358 404,332 416,290 Z"/>
+        <g class="b-fol">${folia}</g>
+        <path class="b-stem" d="M346,296 C340,316 336,334 344,352 C352,372 354,392 360,408 C366,420 388,420 394,406 C392,384 394,360 404,338 C412,320 414,306 412,296 Z"/>
+        <path class="b-cx" d="${CORTEX}"/>
+        <g clip-path="url(#cxClip)" class="lobes">
+          <path fill="var(--hema)" d="M0,0 L302,0 L302,44 C290,88 302,120 282,150 C270,175 264,200 259,228 L172,254 L0,320 Z"/>
+          <path fill="var(--calm)" d="M302,0 L486,0 L484,104 C470,140 494,170 482,204 L413,180 C410,190 405,200 395,205 L259,228 C264,200 270,175 282,150 C302,120 290,88 302,44 Z"/>
+          <path fill="var(--myelin)" d="M486,0 L600,0 L600,420 L442,282 L482,204 C494,170 470,140 484,104 Z"/>
+          <path fill="var(--eosin)" d="M172,254 L259,228 L395,205 C405,200 410,190 413,180 L482,204 L442,282 L442,440 L210,440 L150,290 Z"/>
+        </g>
+        <g class="b-g">${SULCI.map(d => `<path d="${d}"/>`).join("")}</g>
+        <path class="b-edge" d="${CORTEX}"/>
+      </g>`;
+  };
   const ICONS = {
     neuron: "M12 9.5a2.5 2.5 0 1 0 .01 0M12 12v9M10 8 6 4M14 8l4-4M9.5 10.5H4M14.5 10.5H20",
     synapse: "M5 3v5a7 7 0 0 0 14 0V3M5 21h14M9 16v.01M12 17.5v.01M15 16v.01",
@@ -61,13 +95,8 @@
           <div class="progress"><span class="score">${t(UI.progress)} ${n} ${t(UI.of)} ${all.length}</span><div class="meter"><i style="width:${n / all.length * 100}%"></i></div></div>
         </div>
         <figure class="hero-map">
-          <svg viewBox="40 40 520 380" role="img" aria-label="${t(UI.mapHint)}">
-            <defs><radialGradient id="tissueG" cx="40%" cy="35%" r="75%"><stop offset="0" stop-color="var(--tissue-2)"/><stop offset="1" stop-color="var(--tissue)"/></radialGradient></defs>
-            <path class="b-stem" d="M330,290 C345,288 370,288 386,292 L378,398 C365,404 350,404 340,398 Z"/>
-            <path class="b-cer" d="M392,292 C418,262 500,260 522,284 C538,312 512,348 470,350 C428,352 392,330 392,292 Z"/>
-            <path class="b-cer-g" d="M405,300 C440,285 490,282 515,295 M402,315 C440,302 495,302 520,312 M410,330 C445,322 490,322 510,330"/>
-            <path class="b-cx" d="M75,235 C45,170 80,85 175,62 C260,50 400,60 445,105 C500,135 535,190 520,245 C505,265 470,262 440,250 C430,285 380,305 320,305 C240,305 160,295 130,275 C100,260 85,250 75,235 Z"/>
-            <path class="b-g" d="M100,150 C140,140 180,150 215,135 M95,195 C140,185 180,195 225,180 M150,95 C170,120 200,110 240,100 M271,64 C262,110 248,160 234,202 M320,95 C350,110 380,100 415,120 M310,150 C350,140 380,160 420,150 M460,150 C480,175 500,190 510,215 M120,240 C200,212 330,198 425,205 M160,265 C220,255 300,262 400,250"/>
+          <svg viewBox="40 20 540 410" role="img" aria-label="${t(UI.mapHint)}">
+            ${brainSVG()}
             ${dots}
           </svg>
           <figcaption class="tip">${t(UI.mapHint)}</figcaption>
