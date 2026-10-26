@@ -58,9 +58,9 @@ button:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:2px sol
 .meter i{display:block;height:100%;background:var(--calm);width:0;transition:width .3s var(--ease-out)}
 .hero-map{margin:0;display:grid;gap:6px;justify-items:center}
 .hero-map svg{width:100%;height:auto;overflow:visible}
-.hero-map{--bl:#4a3d5e}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .hero-map{--bl:#c9bddb}}
-:root[data-theme="dark"] .hero-map{--bl:#c9bddb}
+.hero-map,.art-cell{--bl:#4a3d5e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) :is(.hero-map,.art-cell){--bl:#c9bddb}}
+:root[data-theme="dark"] :is(.hero-map,.art-cell){--bl:#c9bddb}
 .art{filter:drop-shadow(0 14px 22px rgb(0 0 0 / .25))}
 .art .lb-f{fill:color-mix(in srgb,var(--hema) 26%,var(--tissue))}
 .art .lb-p{fill:color-mix(in srgb,var(--myelin) 30%,var(--tissue))}
@@ -68,7 +68,7 @@ button:focus-visible,a:focus-visible,[role=button]:focus-visible{outline:2px sol
 .art .lb-o{fill:color-mix(in srgb,var(--eosin) 28%,var(--tissue))}
 .art .lb-w{fill:var(--tissue-2)}
 .art .ln{stroke:var(--bl);stroke-width:2;opacity:.8}
-.art path:not([class]){fill:var(--bl)}
+.hero-map .art path:not([class]){fill:var(--bl)}
 .spot-l .dot{fill:var(--tissue-edge);transition:transform 160ms var(--ease-out);transform-box:fill-box;transform-origin:center}
 .spot-l.on .dot{fill:var(--eosin);stroke:var(--surface);stroke-width:4}
 .spot-l .halo{fill:var(--eosin);opacity:.25;transform-box:fill-box;transform-origin:center;animation:halo 2.4s ease-out infinite}
@@ -157,4 +157,28 @@ input[type=range]{accent-color:var(--hema)}
 .ep{cursor:pointer}
 .ep.active{filter:drop-shadow(0 0 5px var(--eosin))}
 .syn-el{transition:opacity .45s, transform .6s var(--ease-out)}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+/* иллюстрации клеток */
+.art-cell .lbl.big-l{font-size:26px}
+@media (max-width:600px){.art-cell .lbl.big-l{font-size:38px}}
+.credit{font-size:12px}
+.nr-cell{stroke:var(--bl);stroke-width:2}
+.nr-body path{fill:color-mix(in srgb,var(--hema) 42%,var(--tissue))}
+.nr-body path.nr-nuc{fill:var(--hema)}
+.nr-my path{fill:color-mix(in srgb,var(--myelin) 75%,var(--tissue))}
+.nr-myn path{fill:var(--eosin)}
+.hz{fill:transparent;stroke:none;cursor:pointer}
+.hz.active,.hz.active>*{stroke:var(--eosin);stroke-width:4;stroke-dasharray:10 7}
+.art-cell .pulse{fill:var(--myelin);filter:drop-shadow(0 0 10px var(--myelin))}
+[data-f=sy-cyto]{fill:color-mix(in srgb,var(--hema) 22%,var(--tissue))}[data-f=sy-cyto2]{fill:var(--tissue-2)}[data-f=sy-ves]{fill:color-mix(in srgb,var(--surface) 55%,var(--tissue-2))}
+.syn-art .art :is(path,polygon):not([data-f]):not([fill="none"]){fill:var(--bl)}
+[data-f=sy-fib]{fill:var(--tissue-edge);opacity:.6}[data-f=sy-mem]{fill:var(--tissue-edge)}
+[data-f=sy-nt]{fill:var(--eosin)}[data-f=sy-rec]{fill:var(--calm)}[data-f=sy-ca]{fill:var(--myelin)}[data-f=sy-tr]{fill:var(--hema)}[data-f=sy-k]{fill:var(--bl)}
+[data-s=sy-mem]{stroke:var(--tissue-edge)}[data-s=sy-fib]{stroke:var(--tissue-edge)}[data-s=sy-k]{stroke:var(--bl)}
+[data-s=sy-cae]{stroke:color-mix(in srgb,var(--myelin) 60%,var(--ink))}[data-s=sy-tre]{stroke:color-mix(in srgb,var(--hema) 60%,var(--ink))}
+.nt-out{transition:opacity .45s}
+.syn-art .imp{fill:var(--myelin);filter:drop-shadow(0 0 12px var(--myelin));animation:imp 1.6s var(--ease-out) infinite}
+@keyframes imp{0%{transform:translateY(0);opacity:0}15%{opacity:1}100%{transform:translateY(300px);opacity:0}}
+.syn-art .ca circle{fill:var(--myelin);stroke:var(--surface);stroke-width:2}
+.syn-art .ring{fill:none;stroke:var(--eosin);stroke-width:5;stroke-dasharray:14 9}
+.syn-art .ions circle{fill:var(--calm);stroke:var(--surface);stroke-width:2}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}.syn-art .imp{animation:none}}

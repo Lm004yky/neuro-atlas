@@ -60,20 +60,21 @@ NA.register({
     },
     {
       title: ["Строение нейрона и бег импульса", "Neuron parts and the travelling impulse"],
+      /* Части нейрона — прозрачные «горячие зоны» поверх иллюстрации (координаты в viewBox 0 0 1179 634) */
       html: () => `<div class="split"><div class="stage">
-        <svg viewBox="0 0 800 260" role="img">
-          <g class="np" data-n="dendrites"><path class="hl" fill="none" stroke="var(--hema)" stroke-width="5" stroke-linecap="round" d="M118,110 L60,60 L30,50 M60,60 L45,25 M112,150 L55,200 L25,205 M55,200 L50,235 M110,128 L40,128 L10,110 M40,128 L15,150 M130,96 L110,40 L85,20 M110,40 L125,12 M135,165 L120,225 L95,245"/></g>
-          <g class="np" data-n="soma"><circle class="hl" cx="150" cy="130" r="40" fill="var(--tissue)" stroke="var(--hema)" stroke-width="3"/></g>
-          <g class="np" data-n="nucleus"><circle class="hl" cx="146" cy="128" r="14" fill="var(--hema)" stroke="var(--hema)" stroke-width="2"/></g>
-          <g class="np" data-n="hillock"><path class="hl" d="M186,116 L214,126 L214,134 L186,144 Z" fill="var(--tissue)" stroke="var(--eosin)" stroke-width="3"/></g>
-          <g class="np" data-n="axon"><line class="hl" x1="214" y1="130" x2="650" y2="130" stroke="var(--hema)" stroke-width="5"/></g>
-          <g class="np" data-n="myelin">${[230, 320, 410, 500].map(x => `<rect class="hl" x="${x}" y="118" width="70" height="24" rx="12" fill="var(--myelin)" stroke="var(--myelin)" stroke-width="2"/>`).join("")}</g>
-          <g class="np" data-n="node">${[310, 400, 490].map(x => `<rect x="${x - 10}" y="110" width="20" height="40" fill="transparent"/><circle class="hl" cx="${x}" cy="130" r="4" fill="var(--eosin)" stroke="var(--eosin)"/>`).join("")}</g>
-          <g class="np" data-n="terminal"><path class="hl" fill="none" stroke="var(--hema)" stroke-width="4" d="M650,130 L720,80 M650,130 L735,130 M650,130 L720,182"/>
-            <circle class="hl" cx="724" cy="78" r="11" fill="var(--eosin)" stroke="var(--eosin)"/><circle class="hl" cx="740" cy="130" r="11" fill="var(--eosin)" stroke="var(--eosin)"/><circle class="hl" cx="724" cy="184" r="11" fill="var(--eosin)" stroke="var(--eosin)"/></g>
-          <circle class="pulse" cx="200" cy="130" r="9" fill="var(--myelin)" style="filter:drop-shadow(0 0 6px var(--myelin))" opacity="0"/>
-          <text class="lbl" x="20" y="252">${NA.t(["дендриты", "dendrites"])}</text><text class="lbl" x="120" y="190">${NA.t(["тело", "soma"])}</text><text class="lbl" x="232" y="108">${NA.t(["миелин", "myelin"])}</text><text class="lbl" x="290" y="168">${NA.t(["перехват Ранвье", "node of Ranvier"])}</text><text class="lbl" x="690" y="225">${NA.t(["терминали", "terminals"])}</text>
+        <svg viewBox="0 20 1179 600" role="img" class="art-cell">
+          <g class="art">${NA.art.neuron}</g>
+          <ellipse class="np hz" data-n="dendrites" cx="180" cy="330" rx="165" ry="270"/>
+          <ellipse class="np hz" data-n="soma" cx="280" cy="400" rx="75" ry="65"/>
+          <ellipse class="np hz" data-n="nucleus" cx="272" cy="410" rx="28" ry="26"/>
+          <ellipse class="np hz" data-n="hillock" cx="368" cy="385" rx="26" ry="22"/>
+          <g class="np hz" data-n="myelin">${[[430, 402, 8], [545, 428, 4], [660, 435, -2], [765, 400, -25], [840, 322, -55]].map(([x, y, a]) => `<ellipse cx="${x}" cy="${y}" rx="52" ry="26" transform="rotate(${a} ${x} ${y})"/>`).join("")}</g>
+          <g class="np hz" data-n="node">${[[487, 413], [602, 435], [717, 422], [808, 365]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="14"/>`).join("")}</g>
+          <ellipse class="np hz" data-n="terminal" cx="1050" cy="200" rx="135" ry="140"/>
+          <circle class="pulse" r="16" cx="368" cy="385" opacity="0"/>
+          <text class="lbl big-l" x="40" y="70">${NA.t(["дендриты", "dendrites"])}</text><text class="lbl big-l" x="230" y="510">${NA.t(["тело", "soma"])}</text><text class="lbl big-l" x="470" y="365">${NA.t(["миелин", "myelin"])}</text><text class="lbl big-l" x="560" y="490">${NA.t(["перехват Ранвье", "node of Ranvier"])}</text><text class="lbl big-l" x="960" y="380">${NA.t(["терминали", "terminals"])}</text>
         </svg>
+        <p class="credit tip">${NA.t(["Иллюстрация", "Illustration"])}: Quasar Jarosz, <a href="https://commons.wikimedia.org/wiki/File:Neuron_Hand-tuned.svg" target="_blank" rel="noopener">CC BY-SA 3.0</a></p>
         <div class="row"><button class="btn fire">${NA.t(["▶ Запустить импульс", "▶ Fire an impulse"])}</button><span class="tip ft"></span></div>
       </div><article class="card info" aria-live="polite"></article></div>`,
       init(root) {
@@ -82,8 +83,7 @@ NA.register({
           soma: [["Тело клетки (сома)", "Cell body (soma)"], ["Суммирует входящие сигналы: возбуждающие толкают к порогу, тормозные отталкивают.", "Adds up the inputs: excitatory ones push towards threshold, inhibitory ones pull away."]],
           nucleus: [["Ядро", "Nucleus"], ["Хранит ДНК. Долговременная память требует новых белков, поэтому гены в ядре важны для запоминания.", "Stores DNA. Long-term memory needs new proteins, so genes in the nucleus matter for remembering."]],
           hillock: [["Аксонный холмик", "Axon hillock"], ["Зона запуска. Здесь решается, будет импульс или нет: это и есть порог из игры выше.", "The trigger zone. This is where the fire-or-not decision happens: the threshold from the demo above."]],
-          axon: [["Аксон", "Axon"], ["Проводит импульс от тела к терминалям, иногда больше метра — от спины до пальцев ноги.", "Carries the impulse to the terminals, sometimes over a metre — from the spine to the toes."]],
-          myelin: [["Миелин", "Myelin"], ["Изоляция из глиальных клеток. Ускоряет проведение до 120 м/с.", "Insulation made by glial cells. Speeds conduction up to 120 m/s."]],
+          myelin: [["Аксон в миелине", "Myelinated axon"], ["Аксон несёт импульс к терминалям, иногда больше метра. Жёлтые клетки — шванновские, они наматываются на аксон слоями миелина и ускоряют проведение до 120 м/с.", "The axon carries the impulse to the terminals, sometimes over a metre. The yellow Schwann cells wrap it in layers of myelin, speeding conduction up to 120 m/s."]],
           node: [["Перехваты Ранвье", "Nodes of Ranvier"], ["Промежутки без миелина. Импульс «прыгает» от перехвата к перехвату — поэтому быстро.", "Gaps in the myelin. The impulse jumps from node to node, which is why it is fast."]],
           terminal: [["Терминали", "Terminals"], ["Здесь электрический сигнал превращается в химический — см. следующую тему «Синапс».", "Here the electrical signal becomes chemical — see the next topic, Synapse."]]
         };
@@ -92,12 +92,12 @@ NA.register({
         NA.clickable(parts, g => NA.t(N[g.dataset.n][0]), g => show(g.dataset.n));
         show("hillock");
         const pulse = root.querySelector(".pulse"), ft = root.querySelector(".ft");
-        const hops = [[200, ["Холмик: порог пройден", "Hillock: threshold crossed"]], [310, ["Перехват 1", "Node 1"]], [400, ["Перехват 2", "Node 2"]], [490, ["Перехват 3", "Node 3"]], [585, ["Перехват 4", "Node 4"]], [650, ["Конец аксона", "End of axon"]], [740, ["Терминаль: выброс медиатора", "Terminal: transmitter released"]]];
+        const hops = [[368, 385, ["Холмик: порог пройден", "Hillock: threshold crossed"]], [487, 413, ["Перехват 1", "Node 1"]], [602, 435, ["Перехват 2", "Node 2"]], [717, 422, ["Перехват 3", "Node 3"]], [808, 365, ["Перехват 4", "Node 4"]], [880, 270, ["Конец аксона", "End of axon"]], [1040, 190, ["Терминаль: выброс медиатора", "Terminal: transmitter released"]]];
         let busy = false;
         root.querySelector(".fire").onclick = () => {
           if (busy) return; busy = true; pulse.setAttribute("opacity", 1);
-          hops.forEach(([x, txt], i) => setTimeout(() => {
-            pulse.setAttribute("cx", x); ft.textContent = NA.t(txt);
+          hops.forEach(([x, y, txt], i) => setTimeout(() => {
+            pulse.setAttribute("cx", x); pulse.setAttribute("cy", y); ft.textContent = NA.t(txt);
             if (i === hops.length - 1) setTimeout(() => { pulse.setAttribute("opacity", 0); busy = false; ft.textContent = "" }, 900);
           }, i * 380));
         };

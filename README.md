@@ -42,3 +42,7 @@
 ## Источники
 
 - Иллюстрация мозга на главной: [Lobes of the brain NL.svg](https://commons.wikimedia.org/wiki/File:Lobes_of_the_brain_NL.svg), Wikimedia Commons, общественное достояние (public domain). Цвета перекрашены под тему сайта.
+- Нейрон: [Neuron Hand-tuned.svg](https://commons.wikimedia.org/wiki/File:Neuron_Hand-tuned.svg), Quasar Jarosz, CC BY-SA 3.0.
+- Синапс: [SynapseSchematic unlabeled.svg](https://commons.wikimedia.org/wiki/File:SynapseSchematic_unlabeled.svg), Thomas Splettstoesser (scistyle.com), CC BY-SA 4.0.
+
+Перекрашенные версии этих двух иллюстраций (`js/art-cells.js`) распространяются по той же лицензии CC BY-SA.

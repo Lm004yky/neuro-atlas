@@ -7,22 +7,21 @@ NA.register({
   plays: [
     {
       title: ["Синапс по шагам", "The synapse step by step"],
+      /* Иллюстрация + наши слои поверх (viewBox 0 0 973 1064): импульс, Ca²⁺, подсветки, Na⁺ */
       html: () => `<div class="split"><div class="stage">
-        <svg viewBox="0 0 600 330" role="img">
-          <path class="pre syn-el" d="M110,0 L110,120 C110,175 160,190 300,190 C440,190 490,175 490,120 L490,0 Z" fill="var(--tissue)" stroke="var(--hema)" stroke-width="3"/>
-          <path class="post syn-el" d="M60,330 L60,250 C60,238 70,232 90,232 L510,232 C530,232 540,238 540,250 L540,330 Z" fill="var(--tissue-2)" stroke="var(--calm)" stroke-width="3"/>
-          <rect x="150" y="170" width="16" height="22" rx="3" fill="var(--myelin)"/><rect x="434" y="170" width="16" height="22" rx="3" fill="var(--myelin)"/>
-          <rect x="470" y="110" width="16" height="24" rx="3" fill="var(--hema)"/><text class="lbl" x="420" y="105">${NA.t(["транспортер", "transporter"])}</text>
-          ${[190, 260, 330, 400].map(x => `<rect x="${x}" y="226" width="22" height="14" rx="3" fill="var(--calm)"/>`).join("")}
-          <g class="ves syn-el">${[[240, 90], [300, 70], [360, 95]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="18" fill="var(--surface)" stroke="var(--eosin)" stroke-width="2"/><circle cx="${x - 5}" cy="${y - 4}" r="3" fill="var(--eosin)"/><circle cx="${x + 5}" cy="${y + 4}" r="3" fill="var(--eosin)"/>`).join("")}</g>
-          <g class="ca syn-el" fill="var(--myelin)"><circle cx="158" cy="160" r="4"/><circle cx="170" cy="148" r="4"/><circle cx="148" cy="140" r="4"/><circle cx="442" cy="160" r="4"/><circle cx="430" cy="146" r="4"/><circle cx="452" cy="138" r="4"/><text class="lbl" x="120" y="128">Ca²⁺</text></g>
-          <g class="nt syn-el" fill="var(--eosin)">${[201, 271, 341, 411].map(x => `<circle cx="${x}" cy="218" r="4"/>`).join("")}<circle cx="236" cy="208" r="4"/><circle cx="306" cy="210" r="4"/><circle cx="376" cy="206" r="4"/></g>
-          <g class="ions syn-el" fill="var(--calm)"><text class="lbl" x="200" y="292">${NA.t(["Na⁺ входит → возбуждение", "Na⁺ enters → excitation"])}</text>${[201, 271, 341, 411].map((x, i) => `<circle cx="${x}" cy="${262 + (i % 2) * 6}" r="4"/>`).join("")}</g>
-          <g class="back syn-el" fill="var(--eosin)"><circle cx="478" cy="150" r="4"/><circle cx="470" cy="168" r="4"/><circle cx="455" cy="200" r="4"/></g>
-          <text class="lbl" x="220" y="30">${NA.t(["пресинаптическая терминаль", "presynaptic terminal"])}</text>
-          <text class="lbl" x="255" y="214">${NA.t(["щель ~20 нм", "cleft ~20 nm"])}</text>
-          <text class="lbl" x="210" y="320">${NA.t(["постсинаптический нейрон", "postsynaptic neuron"])}</text>
-        </svg></div>
+        <svg viewBox="0 0 973 1064" role="img" class="art-cell syn-art">
+          <g class="art">${NA.art.synapse}</g>
+          <circle class="imp syn-el" cx="475" cy="60" r="22"/>
+          <g class="ca syn-el">${[[300, 640], [262, 618], [318, 610], [478, 668], [505, 650], [452, 650]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="10"/>`).join("")}<text class="lbl big-l" x="200" y="590">Ca²⁺</text></g>
+          <ellipse class="ring syn-el r-fuse" cx="625" cy="690" rx="80" ry="60"/>
+          <ellipse class="ring syn-el r-rec" cx="575" cy="845" rx="230" ry="55"/>
+          <g class="ions syn-el">${[[405, 930], [520, 945], [630, 940], [740, 925]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="10"/>`).join("")}<text class="lbl big-l" x="360" y="1010">${NA.t(["Na⁺ входит → возбуждение", "Na⁺ enters → excitation"])}</text></g>
+          <ellipse class="ring syn-el r-tr" cx="745" cy="680" rx="70" ry="80"/>
+          <text class="lbl big-l" x="20" y="200">${NA.t(["пресинаптическая", "presynaptic"])}</text><text class="lbl big-l" x="20" y="232">${NA.t(["терминаль", "terminal"])}</text>
+          <text class="lbl big-l" x="20" y="790">${NA.t(["щель ~20 нм", "cleft ~20 nm"])}</text>
+          <text class="lbl big-l" x="960" y="1050" text-anchor="end">${NA.t(["постсинаптический нейрон", "postsynaptic neuron"])}</text>
+        </svg>
+        <p class="credit tip">${NA.t(["Иллюстрация", "Illustration"])}: Thomas Splettstoesser (scistyle.com), <a href="https://commons.wikimedia.org/wiki/File:SynapseSchematic_unlabeled.svg" target="_blank" rel="noopener">CC BY-SA 4.0</a></p></div>
         <article class="card"><div class="steps"></div><p class="caption cap"></p><div class="row"><button class="btn ghost pv">${NA.t(["Назад", "Back"])}</button><button class="btn nx">${NA.t(["Дальше", "Next"])}</button></div></article></div>`,
       init(root) {
         const S = [
@@ -36,14 +35,15 @@ NA.register({
         const steps = root.querySelector(".steps"), cap = root.querySelector(".cap"), q = s => root.querySelector("." + s);
         let st = 0;
         S.forEach((_, i) => { const b = document.createElement("button"); b.textContent = i + 1; b.onclick = () => go(i); steps.append(b) });
+        /* Какие слои видны на каждом шаге; медиатор в щели (.nt-out) — с шага «выброс» */
+        const ON = [["imp"], ["ca"], ["ca", "r-fuse", "nt"], ["nt", "r-rec"], ["nt", "r-rec", "ions"], ["nt", "r-tr"]];
+        const outNT = [...root.querySelectorAll(".nt-out")];
         function go(i) {
-          st = Math.max(0, Math.min(S.length - 1, i)); const s = S[st];
+          st = Math.max(0, Math.min(S.length - 1, i));
           [...steps.children].forEach((b, j) => b.setAttribute("aria-current", j === st));
-          cap.innerHTML = NA.t(s.t);
-          ["ca", "nt", "ions", "back"].forEach(k => q(k).style.opacity = s.on.includes(k) ? 1 : 0);
-          q("ves").style.transform = s.move ? "translateY(80px)" : "none"; q("ves").style.opacity = st >= 3 ? .35 : 1;
-          q("pre").style.fill = st === 0 ? "color-mix(in srgb,var(--myelin) 30%,var(--tissue))" : "var(--tissue)";
-          q("post").style.fill = st === 4 ? "color-mix(in srgb,var(--calm) 30%,var(--tissue-2))" : "var(--tissue-2)";
+          cap.innerHTML = NA.t(S[st].t);
+          ["imp", "ca", "r-fuse", "r-rec", "ions", "r-tr"].forEach(k => q(k).style.opacity = ON[st].includes(k) ? 1 : 0);
+          outNT.forEach(p => p.style.opacity = ON[st].includes("nt") ? 1 : 0);
         }
         q("pv").onclick = () => go(st - 1); q("nx").onclick = () => go(st + 1); go(0);
       }
