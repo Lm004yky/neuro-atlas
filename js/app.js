@@ -7,6 +7,7 @@
     kicker: ["Нейронаука · интерактивный курс", "Neuroscience · interactive course"],
     title: ["Атлас мозга", "Brain Atlas"],
     lede: ["Как мозг слышит, держит равновесие и решает, стрелять нейрону или нет. Каждая тема — схема, которую можно потрогать.", "How the brain hears, keeps balance and decides whether a neuron fires. Every topic is a diagram you can touch."],
+    credit: ["иллюстрация: Wikimedia Commons", "illustration: Wikimedia Commons"],
     mapHint: ["Точки — темы курса там, где они живут в мозге", "Dots mark where each topic lives in the brain"],
     start: ["Начать с нейрона →", "Start with the neuron →"], cont: ["Продолжить: ", "Continue: "], again2: ["Всё пройдено — повторить", "All done — review"],
     progress: ["Пройдено", "Completed"], of: ["из", "of"],
@@ -29,43 +30,9 @@
   const ready = () => NA.topics.filter(x => !x.soon);
   const ordered = () => NA.levels.flatMap(l => ready().filter(x => x.level === l.id));
 
-  /* Где тема «живёт» в мозге — точки на схеме главной (координаты в системе viewBox 40 40 520 380) */
-  const SPOTS = { atlas: [160, 150], neuron: [385, 100], synapse: [430, 150], hearing: [312, 246], vestibular: [490, 312],
-    vision: [522, 196], touch: [322, 92], movement: [280, 92], memory: [365, 282], emotion: [285, 284], sleep: [375, 372], glia: [205, 205] };
-  /* Мозг сбоку (левое полушарие, лоб слева). Доли — цветные области, обрезанные силуэтом коры */
-  const CORTEX = "M70,230 C58,150 120,70 230,50 C330,34 452,58 512,118 C556,163 562,228 532,266 C512,290 472,292 442,282 C412,314 342,330 272,322 C212,316 172,302 152,284 C140,272 150,258 172,254 C150,262 96,262 70,230 Z";
-  const SULCI = [
-    "M172,254 C240,232 320,222 395,205 C405,200 410,190 413,180",
-    "M302,44 C290,88 302,120 282,150 C270,175 264,200 259,228",
-    "M264,50 C252,92 260,124 240,158 C230,178 228,198 224,236",
-    "M340,48 C330,92 342,124 322,158 C314,178 310,198 307,220",
-    "M108,138 C150,126 190,140 240,116", "M94,190 C140,176 186,196 230,180", "M120,232 C150,220 180,226 214,212",
-    "M332,140 C372,128 402,150 452,138 C476,134 496,148 506,170",
-    "M372,176 C392,170 404,184 424,180", "M484,104 C470,140 494,170 482,204",
-    "M470,232 C494,242 514,236 536,224", "M206,282 C262,262 330,256 422,238", "M234,306 C292,296 352,292 432,268",
-    "M140,92 C160,104 182,96 200,84", "M402,92 C420,100 436,92 456,98"
-  ];
-  const brainSVG = () => {
-    const folia = [...Array(7)].map((_, i) => `<path d="M${424 + i * 3},${290 + i * 9} C${464 + i},${280 + i * 9} ${518 - i * 3},${280 + i * 9} ${554 - i * 6},${292 + i * 8}"/>`).join("");
-    return `<defs>
-      <radialGradient id="tissueG" cx="38%" cy="30%" r="80%"><stop offset="0" stop-color="color-mix(in srgb,var(--tissue-2) 70%,var(--surface))"/><stop offset="1" stop-color="var(--tissue)"/></radialGradient>
-      <clipPath id="cxClip"><path d="${CORTEX}"/></clipPath>
-      <filter id="soft" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000" flood-opacity=".28"/></filter></defs>
-      <g filter="url(#soft)">
-        <path class="b-cer" d="M416,290 C436,258 520,252 550,282 C572,312 544,354 488,356 C440,358 404,332 416,290 Z"/>
-        <g class="b-fol">${folia}</g>
-        <path class="b-stem" d="M346,296 C340,316 336,334 344,352 C352,372 354,392 360,408 C366,420 388,420 394,406 C392,384 394,360 404,338 C412,320 414,306 412,296 Z"/>
-        <path class="b-cx" d="${CORTEX}"/>
-        <g clip-path="url(#cxClip)" class="lobes">
-          <path fill="var(--hema)" d="M0,0 L302,0 L302,44 C290,88 302,120 282,150 C270,175 264,200 259,228 L172,254 L0,320 Z"/>
-          <path fill="var(--calm)" d="M302,0 L486,0 L484,104 C470,140 494,170 482,204 L413,180 C410,190 405,200 395,205 L259,228 C264,200 270,175 282,150 C302,120 290,88 302,44 Z"/>
-          <path fill="var(--myelin)" d="M486,0 L600,0 L600,420 L442,282 L482,204 C494,170 470,140 484,104 Z"/>
-          <path fill="var(--eosin)" d="M172,254 L259,228 L395,205 C405,200 410,190 413,180 L482,204 L442,282 L442,440 L210,440 L150,290 Z"/>
-        </g>
-        <g class="b-g">${SULCI.map(d => `<path d="${d}"/>`).join("")}</g>
-        <path class="b-edge" d="${CORTEX}"/>
-      </g>`;
-  };
+  /* Где тема «живёт» в мозге — точки на иллюстрации главной (viewBox 0 0 1024 732) */
+  const SPOTS = { atlas: [230, 300], glia: [250, 430], movement: [478, 175], touch: [548, 150], neuron: [650, 170], synapse: [735, 255],
+    hearing: [560, 395], emotion: [420, 470], memory: [655, 455], vision: [900, 395], vestibular: [765, 585], sleep: [600, 655] };
   const ICONS = {
     neuron: "M12 9.5a2.5 2.5 0 1 0 .01 0M12 12v9M10 8 6 4M14 8l4-4M9.5 10.5H4M14.5 10.5H20",
     synapse: "M5 3v5a7 7 0 0 0 14 0V3M5 21h14M9 16v.01M12 17.5v.01M15 16v.01",
@@ -82,8 +49,8 @@
     const dots = NA.topics.filter(x => SPOTS[x.id]).map(x => {
       const [cx, cy] = SPOTS[x.id], on = !x.soon;
       return `<a href="#/${x.id}" class="spot-l ${on ? "on" : ""}" aria-label="${t(x.title)}">
-        ${on ? `<circle class="halo" cx="${cx}" cy="${cy}" r="14"/>` : ""}<circle class="dot" cx="${cx}" cy="${cy}" r="${on ? 7 : 4.5}"/>
-        ${on ? `<text class="tag" x="${cx + 12}" y="${cy - 10}">${t(x.title)}</text>` : `<title>${t(x.title)} · ${t(UI.soon)}</title>`}</a>`;
+        ${on ? `<circle class="halo" cx="${cx}" cy="${cy}" r="26"/>` : ""}<circle class="dot" cx="${cx}" cy="${cy}" r="${on ? 13 : 8}"/>
+        ${on ? `<text class="tag" x="${cx + 22}" y="${cy - 18}">${t(x.title)}</text>` : `<title>${t(x.title)} · ${t(UI.soon)}</title>`}</a>`;
     }).join("");
     app.innerHTML = `
       <section class="home-hero">
@@ -95,11 +62,11 @@
           <div class="progress"><span class="score">${t(UI.progress)} ${n} ${t(UI.of)} ${all.length}</span><div class="meter"><i style="width:${n / all.length * 100}%"></i></div></div>
         </div>
         <figure class="hero-map">
-          <svg viewBox="40 20 540 410" role="img" aria-label="${t(UI.mapHint)}">
-            ${brainSVG()}
+          <svg viewBox="0 0 1024 732" role="img" aria-label="${t(UI.mapHint)}">
+            <g class="art">${NA.brainArt}</g>
             ${dots}
           </svg>
-          <figcaption class="tip">${t(UI.mapHint)}</figcaption>
+          <figcaption class="tip">${t(UI.mapHint)} · <a href="https://commons.wikimedia.org/wiki/File:Lobes_of_the_brain_NL.svg" target="_blank" rel="noopener">${t(UI.credit)}</a></figcaption>
         </figure>
       </section>
       ${NA.levels.map((l, i) => {

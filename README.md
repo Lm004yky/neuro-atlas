@@ -38,3 +38,7 @@
 - `js/core.js` — язык, звук, хелперы, реестр тем
 - `js/app.js` — главная, шаблон темы, путь сигнала, тесты
 - `js/topics/*.js` — по файлу на тему
+
+## Источники
+
+- Иллюстрация мозга на главной: [Lobes of the brain NL.svg](https://commons.wikimedia.org/wiki/File:Lobes_of_the_brain_NL.svg), Wikimedia Commons, общественное достояние (public domain). Цвета перекрашены под тему сайта.
