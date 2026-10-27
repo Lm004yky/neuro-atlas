@@ -24,42 +24,39 @@ const R = {
 };
 
 const LB={lAmyg:["миндалина","amygdala"],lStem:["ствол","brainstem"],lParietal:["теменная","parietal"],lStri:["стриатум","striatum"],lThal:["таламус","thalamus"],lOccipital:["затылочная","occipital"],lTemporal:["височная","temporal"],lHypo:["гипоталамус","hypothalamus"],lCereb:["мозжечок","cerebellum"],lFrontal:["лобная","frontal"],lHippo:["гиппокамп","hippocampus"],lNigra:["чёрная субстанция","substantia nigra"],lCallosum:["мозолистое тело","corpus callosum"]};
-const SURF = () => `<g class="surface">
-          <path class="part lobe" data-id="brainstem" style="fill:var(--tissue-2)" d="M330,300 C345,298 370,298 386,302 L378,398 C365,404 350,404 340,398 Z"/>
-          <path class="part lobe" data-id="cerebellum" style="fill:var(--tissue-2)" d="M392,292 C418,262 500,260 522,284 C538,312 512,348 470,350 C428,352 392,330 392,292 Z"/>
-          <path class="gyri" d="M405,300 C440,285 490,282 515,295 M402,315 C440,302 495,302 520,312 M410,330 C445,322 490,322 510,330"/>
-          <path class="part lobe" data-id="frontal" style="fill:var(--tissue)" d="M75,235 C45,170 80,85 175,62 C215,53 255,52 285,58 L245,205 C200,212 150,222 120,240 C100,245 85,243 75,235 Z"/>
-          <path class="part lobe" data-id="parietal" style="fill:var(--tissue)" d="M285,58 C350,58 410,75 445,105 L425,205 C370,200 300,200 245,205 Z"/>
-          <path class="part lobe" data-id="occipital" style="fill:var(--tissue)" d="M445,105 C500,135 535,190 520,245 C505,265 470,262 440,250 L425,205 Z"/>
-          <path class="part lobe" data-id="temporal" style="fill:var(--tissue)" d="M120,240 C150,222 200,212 245,205 C300,200 370,200 425,205 L440,250 C430,285 380,305 320,305 C240,305 160,295 130,275 C115,265 112,250 120,240 Z"/>
-          <path class="gyri" d="M100,150 C140,140 180,150 215,135 M95,195 C140,185 180,195 225,180 M150,95 C170,120 200,110 240,100 M320,95 C350,110 380,100 415,120 M310,150 C350,140 380,160 420,150 M460,150 C480,175 500,190 510,215 M160,265 C220,255 300,262 400,250 M180,285 C250,280 330,288 410,275"/>
-          <path class="part strip" data-id="motor" style="stroke:var(--hema)" d="M271,64 C262,110 248,160 234,202"/>
-          <path class="part strip" data-id="sensory" style="stroke:var(--calm)" d="M298,66 C290,110 274,160 258,202"/>
-          <ellipse class="part spot" data-id="broca" style="fill:var(--myelin);stroke:var(--myelin)" cx="180" cy="200" rx="26" ry="16"/>
-          <ellipse class="part spot" data-id="wernicke" style="fill:var(--myelin);stroke:var(--myelin)" cx="372" cy="222" rx="26" ry="15"/>
-          <ellipse class="part spot" data-id="auditory" style="fill:var(--calm);stroke:var(--calm)" cx="300" cy="216" rx="22" ry="10"/>
-          <ellipse class="part spot" data-id="visual" style="fill:var(--eosin);stroke:var(--eosin)" cx="505" cy="215" rx="16" ry="28"/>
-          <text class="lbl" x="120" y="130" >${L("lFrontal")}</text><text class="lbl" x="335" y="125" >${L("lParietal")}</text>
-          <text class="lbl" x="455" y="170" >${L("lOccipital")}</text><text class="lbl" x="230" y="275" >${L("lTemporal")}</text>
-          <text class="lbl" x="445" y="318" >${L("lCereb")}</text><text class="lbl" x="390" y="385" >${L("lStem")}</text>
-        </g>`;
-const DEEP = () => `<g class="deep-g" hidden>
-          <path class="ghost-shape" d="M75,235 C45,170 80,85 175,62 C260,50 400,60 445,105 C500,135 535,190 520,245 C505,265 470,262 440,250 C430,285 380,305 320,305 C240,305 160,295 130,275 C100,260 85,250 75,235 Z"/>
-          <path class="ghost-shape" d="M392,292 C418,262 500,260 522,284 C538,312 512,348 470,350 C428,352 392,330 392,292 Z"/>
-          <path class="part deep" data-id="brainstem2" style="fill:var(--tissue-2);stroke:var(--tissue-edge)" d="M330,280 C345,278 370,278 386,282 L378,398 C365,404 350,404 340,398 Z"/>
-          <path class="part deep" data-id="callosum" style="fill:none;stroke:var(--hema);stroke-width:14;stroke-linecap:round" d="M205,140 C250,92 370,90 420,138"/>
-          <path class="part deep" data-id="striatum" style="fill:var(--calm);stroke:var(--calm)" d="M222,170 C210,135 255,118 300,124 C340,130 362,150 360,178 C356,182 350,182 348,178 C346,156 330,142 298,138 C262,135 245,148 252,172 C258,195 225,198 222,170 Z"/>
-          <ellipse class="part deep" data-id="thalamus" style="fill:var(--myelin);stroke:var(--myelin)" cx="318" cy="172" rx="30" ry="19"/>
-          <ellipse class="part deep" data-id="hypothalamus" style="fill:var(--hema);stroke:var(--hema)" cx="278" cy="210" rx="18" ry="10"/>
-          <ellipse class="part deep" data-id="amygdala" style="fill:var(--eosin);stroke:var(--eosin)" cx="282" cy="250" rx="14" ry="11"/>
-          <path class="part deep" data-id="hippocampus" style="fill:none;stroke:var(--calm);stroke-width:12;stroke-linecap:round" d="M300,256 C322,268 356,266 380,250 C392,240 394,226 386,220"/>
-          <ellipse class="part deep" data-id="nigra" style="fill:var(--ink);stroke:var(--ink)" cx="356" cy="300" rx="14" ry="6"/>
-          <text class="lbl" x="275" y="100" >${L("lCallosum")}</text><text class="lbl" x="350" y="168" >${L("lThal")}</text>
-          <text class="lbl" x="150" y="168" >${L("lStri")}</text><text class="lbl" x="190" y="214" >${L("lHypo")}</text>
-          <text class="lbl" x="205" y="256" >${L("lAmyg")}</text><text class="lbl" x="395" y="248" >${L("lHippo")}</text>
-          <text class="lbl" x="250" y="304" >${L("lNigra")}</text>
-        </g>`;
+const LOBE = {"lb-f":"frontal","lb-p":"parietal","lb-t":"temporal","lb-o":"occipital"};
+let wi = 0;
+const lobes = () => NA.brainArt.replace(/class="(lb-[fpto])"/g, (m, c) => `class="${c} part lobe" data-id="${LOBE[c]}"`)
+  .replace(/class="lb-w ln"/g, () => `class="lb-w ln part lobe" data-id="${wi++ % 2 ? "cerebellum" : "brainstem"}"`);
+/* Кора: иллюстрация с главной (viewBox 0 0 1024 732), полосы и зоны поверх */
+const SURF = () => `<svg class="brain atlas-art hero-map" viewBox="0 30 1024 702" role="img"><g class="surface"><g class="art">${lobes()}</g>
+          <path class="part strip" data-id="motor" style="stroke:var(--hema)" d="M548,62 C530,100 500,110 478,160 C462,205 446,262 424,318"/>
+          <path class="part strip" data-id="sensory" style="stroke:var(--calm)" d="M600,64 C588,104 548,122 528,168 C512,212 496,262 474,312"/>
+          <ellipse class="part spot" data-id="broca" style="fill:var(--myelin);stroke:var(--myelin)" cx="360" cy="385" rx="46" ry="28"/>
+          <ellipse class="part spot" data-id="wernicke" style="fill:var(--myelin);stroke:var(--myelin)" cx="745" cy="372" rx="46" ry="26"/>
+          <ellipse class="part spot" data-id="auditory" style="fill:var(--calm);stroke:var(--calm)" cx="585" cy="352" rx="42" ry="17"/>
+          <ellipse class="part spot" data-id="visual" style="fill:var(--eosin);stroke:var(--eosin)" cx="948" cy="420" rx="26" ry="52"/>
+          <text class="lbl" x="120" y="250">${L("lFrontal")}</text><text class="lbl" x="640" y="190">${L("lParietal")}</text>
+          <text class="lbl" x="838" y="505">${L("lOccipital")}</text><text class="lbl" x="400" y="520">${L("lTemporal")}</text>
+          <text class="lbl" x="660" y="620">${L("lCereb")}</text><text class="lbl" x="672" y="716">${L("lStem")}</text>
+        </g></svg>`;
+/* Глубина: срез Lynch (viewBox 0 0 295 326). Миндалина, гиппокамп и стриатум лежат сбоку от среза — показаны пунктиром */
+const DEEP = () => `<svg class="brain atlas-art sag-art art-cell" viewBox="-4 -4 300 270" role="img"><g class="deep-g"><g class="art">${NA.art.sagittal}</g>
+          <path class="part ov" data-id="brainstem2" d="M134,128 C150,124 178,126 190,134 L184,200 L172,262 L152,262 L148,200 C140,180 132,150 134,128 Z"/>
+          <path class="part ov line" data-id="callosum" d="M78,108 C82,68 150,52 196,80 C208,88 214,98 212,108"/>
+          <path class="part ov dash" data-id="striatum" d="M96,112 C96,86 140,74 170,86 C184,92 188,104 182,108 C170,96 140,90 120,100 C110,106 108,118 112,126 C104,128 96,122 96,112 Z"/>
+          <ellipse class="part ov" data-id="thalamus" cx="150" cy="125" rx="20" ry="11"/>
+          <ellipse class="part ov" data-id="hypothalamus" cx="124" cy="145" rx="11" ry="7"/>
+          <ellipse class="part ov dash" data-id="amygdala" cx="132" cy="157" rx="8" ry="7"/>
+          <path class="part ov dash line" data-id="hippocampus" d="M141,160 C160,160 182,140 198,110"/>
+          <ellipse class="part ov" data-id="nigra" cx="164" cy="146" rx="10" ry="5"/>
+          <text class="lbl" x="100" y="58">${L("lCallosum")}</text><text class="lbl" x="176" y="130">${L("lThal")}</text>
+          <text class="lbl" x="34" y="92">${L("lStri")}</text><text class="lbl" x="52" y="146">${L("lHypo")}</text>
+          <text class="lbl" x="66" y="174">${L("lAmyg")}</text><text class="lbl" x="206" y="114">${L("lHippo")}</text>
+          <text class="lbl" x="20" y="200">${L("lNigra")} →</text><text class="lbl" x="192" y="240">${L("lStem")}</text>
+        </g></svg>`;
 R.brainstem2 = R.brainstem;
+const CREDIT = deep => t(["Иллюстрация","Illustration"]) + ": " + (deep ? 'Patrick J. Lynch, <a href="https://commons.wikimedia.org/wiki/File:Brain_human_sagittal_section.svg" target="_blank" rel="noopener">CC BY 2.5</a>' : '<a href="https://commons.wikimedia.org/wiki/File:Lobes_of_the_brain_NL.svg" target="_blank" rel="noopener">Wikimedia Commons</a>, public domain');
 const L = k => t(LB[k]);
 const surfaceIds = ["frontal","parietal","occipital","temporal","cerebellum","brainstem","motor","sensory","broca","wernicke","auditory","visual"];
 const deepIds = ["thalamus","hypothalamus","hippocampus","amygdala","striatum","nigra","callosum"];
@@ -74,9 +71,9 @@ NA.register({
     {
       title: ["Нажимайте на области", "Click the regions"],
       html: () => `<div class="row"><div class="seg" role="group"><button class="vs">${t(["Кора снаружи","Outer cortex"])}</button><button class="vd">${t(["Глубокие структуры","Deep structures"])}</button></div></div>
-        <div class="split"><div class="stage"><svg class="brain" viewBox="40 40 520 380" role="img">${SURF()}${DEEP()}</svg></div><article class="card info" aria-live="polite"></article></div>`,
+        <div class="split"><div class="stage">${SURF()}${DEEP()}<p class="credit tip cr"></p></div><article class="card info" aria-live="polite"></article></div>`,
       init(root) {
-        const svg = root.querySelector(".brain"), info = root.querySelector(".info"), parts = [...svg.querySelectorAll(".part")];
+        const svg = root.querySelector(".stage"), info = root.querySelector(".info"), parts = [...svg.querySelectorAll(".part")];
         function show(id) {
           const r = R[id];
           parts.forEach(p => p.classList.toggle("active", p.dataset.id === id));
@@ -86,7 +83,7 @@ NA.register({
         }
         NA.clickable(parts, p => t(R[p.dataset.id].n), p => show(p.dataset.id));
         const view = deep => {
-          svg.querySelector(".surface").hidden = deep; svg.querySelector(".deep-g").hidden = !deep;
+          svg.querySelector(".atlas-art:not(.sag-art)").toggleAttribute("hidden", deep); svg.querySelector(".sag-art").toggleAttribute("hidden", !deep); root.querySelector(".cr").innerHTML = CREDIT(deep);
           root.querySelector(".vs").setAttribute("aria-pressed", !deep); root.querySelector(".vd").setAttribute("aria-pressed", deep);
           show(deep ? "hippocampus" : "frontal");
         };
@@ -97,7 +94,7 @@ NA.register({
     },
     {
       title: ["Тренажёр: что подсвечено?", "Drill: what is highlighted?"],
-      html: () => `<div class="split"><div class="stage"><svg class="qs" viewBox="40 40 520 380" role="img"></svg></div>
+      html: () => `<div class="split"><div class="stage"><div class="qs"></div></div>
         <article class="card"><p class="score sc"></p><div class="opts"></div><p class="why fb"></p><button class="btn nx" style="justify-self:start">${t(["Следующий","Next"])}</button></article></div>`,
       init(root) {
         const pool = [...surfaceIds, ...deepIds], qs = root.querySelector(".qs"), opts = root.querySelector(".opts"), fb = root.querySelector(".fb");
@@ -107,8 +104,7 @@ NA.register({
           locked = false; cur = pool[Math.floor(Math.random() * pool.length)];
           const deep = deepIds.includes(cur);
           qs.innerHTML = deep ? DEEP() : SURF();
-          const g = qs.firstElementChild; g.hidden = false;
-          qs.querySelectorAll(".lbl").forEach(x => x.remove());
+                    qs.querySelectorAll(".lbl").forEach(x => x.remove());
           qs.querySelectorAll(".part").forEach(p => { p.classList.toggle("active", p.dataset.id === cur); p.style.cursor = "default" });
           const others = NA.shuffle(pool.filter(x => x !== cur && deepIds.includes(x) === deep)).slice(0, 3);
           opts.replaceChildren(...NA.shuffle([cur, ...others]).map(id => {

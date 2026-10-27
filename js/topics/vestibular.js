@@ -6,6 +6,30 @@ NA.register({
   analogy: ["Возьмите стакан с водой и резко поверните: стакан уже повернулся, а вода ещё на месте. Каналы чувствуют именно это отставание жидкости.", "Turn a glass of water sharply: the glass has turned but the water hasn’t yet. The canals sense exactly that lag of the fluid."],
   plays: [
     {
+      title: ["Где это в ухе", "Where it sits in the ear"],
+      html: () => `<div class="split"><div class="stage">
+        <svg viewBox="330 110 320 230" role="img" class="art-cell ear-art">
+          <g class="art">${NA.art.ear}</g>
+          <g class="ep hz" data-v="canals"><ellipse cx="440" cy="196" rx="48" ry="52"/></g>
+          <g class="ep hz" data-v="oto"><ellipse cx="468" cy="262" rx="20" ry="16"/></g>
+          <g class="ep hz" data-v="coch"><circle cx="495" cy="291" r="26"/></g>
+          <g class="ep hz" data-v="nerve"><path d="M520,236 L568,226 L568,250 L522,258 Z"/></g>
+        </svg>
+        <p class="credit tip">${NA.t(["Иллюстрация", "Illustration"])}: Lars Chittka, Axel Brockmann, <a href="https://commons.wikimedia.org/wiki/File:Anatomy_of_the_Human_Ear.svg" target="_blank" rel="noopener">CC BY 2.5</a></p></div>
+        <article class="card info" aria-live="polite"></article></div>`,
+      init(root) {
+        const V = {
+          canals: [["Полукружные каналы", "Semicircular canals"], ["Три кольца под прямыми углами: «да», «нет» и наклон к плечу. Чувствуют повороты головы.", "Three rings at right angles: nod, shake and tilt to the shoulder. They sense head turns."]],
+          oto: [["Преддверие: отолиты", "Vestibule: otoliths"], ["Утрикулус и саккулус с кристаллами. Чувствуют наклон и разгон.", "Utricle and saccule with crystals. They sense tilt and acceleration."]],
+          coch: [["Улитка", "Cochlea"], ["Сосед по лабиринту, но это слух. Общая жидкость — поэтому болезни уха часто бьют и по равновесию.", "The labyrinth neighbour, but it's hearing. Shared fluid, so ear diseases often hit balance too."]],
+          nerve: [["Вестибулярный нерв", "Vestibular nerve"], ["Часть VIII нерва. Несёт сигнал в вестибулярные ядра ствола.", "Part of nerve VIII. Carries the signal to the brainstem vestibular nuclei."]]
+        };
+        const info = root.querySelector(".info"), parts = [...root.querySelectorAll(".ep")];
+        const show = k => { parts.forEach(g => g.classList.toggle("active", g.dataset.v === k)); info.innerHTML = `<h3>${NA.t(V[k][0])}</h3><p>${NA.t(V[k][1])}</p><p class="tip">${NA.t(["Нажмите на другую часть.", "Click another part."])}</p>` };
+        NA.clickable(parts, g => NA.t(V[g.dataset.v][0]), g => show(g.dataset.v)); show("canals");
+      }
+    },
+    {
       title: ["Карусель: почему кружится голова", "Merry-go-round: why you get dizzy"],
       html: () => `<div class="split"><div class="stage">
         <svg viewBox="0 0 640 250" role="img">

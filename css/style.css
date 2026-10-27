@@ -182,3 +182,26 @@ input[type=range]{accent-color:var(--hema)}
 .syn-art .ring{fill:none;stroke:var(--eosin);stroke-width:5;stroke-dasharray:14 9}
 .syn-art .ions circle{fill:var(--calm);stroke:var(--surface);stroke-width:2}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}.syn-art .imp{animation:none}}
+/* Ухо и срез мозга (js/art-organs.js) */
+.ear-art [data-es=ink]{stroke:var(--bl)}.ear-art [data-es=edge]{stroke:var(--tissue-edge)}.ear-art [data-es=red]{stroke:var(--eosin)}.ear-art [data-es=air]{stroke:var(--calm)}.ear-art [data-es=lab]{stroke:var(--hema)}
+.ear-art [data-ef=skin]{fill:color-mix(in srgb,var(--eosin) 22%,var(--tissue))}.ear-art [data-ef=skin2]{fill:color-mix(in srgb,var(--eosin) 38%,var(--tissue))}.ear-art [data-ef=pink]{fill:color-mix(in srgb,var(--eosin) 12%,var(--tissue))}
+.ear-art [data-ef=red]{fill:color-mix(in srgb,var(--eosin) 55%,var(--tissue))}.ear-art [data-ef=red2]{fill:var(--eosin)}.ear-art [data-ef=edge]{fill:var(--tissue-edge)}
+.ear-art [data-ef=cav]{fill:var(--tissue-2)}.ear-art [data-ef=bone]{fill:var(--tissue)}.ear-art [data-ef=surf]{fill:var(--surface)}.ear-art [data-ef=bone2]{fill:color-mix(in srgb,var(--myelin) 18%,var(--tissue))}.ear-art [data-ef=bone3]{fill:color-mix(in srgb,var(--myelin) 50%,var(--tissue))}
+.ear-art [data-ef=lab]{fill:color-mix(in srgb,var(--hema) 50%,var(--tissue))}.ear-art [data-ef=lab2]{fill:color-mix(in srgb,var(--hema) 75%,var(--tissue))}.ear-art [data-ef=lab3]{fill:var(--hema)}
+.ear-art [data-ef=air]{fill:var(--calm)}.ear-art [data-ef=nerve]{fill:var(--myelin)}
+.ear-art .lbl{font-size:15px}.sag-art .lbl{font-size:9px}.atlas-art:not(.sag-art) .lbl{font-size:26px}
+@media (max-width:600px){.ear-art .lbl{font-size:21px}.sag-art .lbl{font-size:12px}.atlas-art:not(.sag-art) .lbl{font-size:36px}}
+.ear-art .wv{fill:none;stroke:var(--eosin);stroke-width:4;stroke-linecap:round}
+.ear-art .glow{fill:none;stroke:var(--eosin);stroke-width:5;opacity:0}
+.sag-art .art path:not([data-f]){fill:var(--bl)}
+[data-f=sg-cx]{fill:color-mix(in srgb,var(--eosin) 14%,var(--tissue))}[data-f=sg-di]{fill:color-mix(in srgb,var(--hema) 22%,var(--tissue))}[data-f=sg-bs]{fill:color-mix(in srgb,var(--myelin) 22%,var(--tissue))}
+.ov{fill:transparent;stroke:transparent;stroke-width:3;cursor:pointer;transition:fill .2s ease,stroke .2s ease}
+.ov.dash{stroke:var(--tissue-edge);stroke-dasharray:6 5;fill:color-mix(in srgb,var(--surface) 30%,transparent)}
+.ov.active{fill:color-mix(in srgb,var(--eosin) 45%,transparent);stroke:var(--eosin);stroke-dasharray:none}
+.ov.line{fill:none!important;stroke-width:16;stroke-linecap:round;stroke:color-mix(in srgb,var(--surface) 1%,transparent)}
+.ov.line.active{stroke:color-mix(in srgb,var(--eosin) 70%,transparent)}
+.ov.dash.line{stroke:var(--tissue-edge);stroke-width:5}.ov.dash.line.active{stroke:var(--eosin)}
+.atlas-art{width:100%;height:auto}
+:is(.atlas-art,.ear-art) .lbl{fill:var(--ink);font-family:var(--f-body);font-weight:600;paint-order:stroke;stroke:var(--surface);stroke-width:5px;stroke-linejoin:round}
+.sag-art .lbl{stroke-width:2.5px}
+.sag-art .ov:not(.active):not(.line){fill:color-mix(in srgb,var(--surface) 22%,transparent);stroke:var(--tissue-edge);stroke-width:1}

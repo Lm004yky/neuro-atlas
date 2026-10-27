@@ -44,5 +44,7 @@
 - Иллюстрация мозга на главной: [Lobes of the brain NL.svg](https://commons.wikimedia.org/wiki/File:Lobes_of_the_brain_NL.svg), Wikimedia Commons, общественное достояние (public domain). Цвета перекрашены под тему сайта.
 - Нейрон: [Neuron Hand-tuned.svg](https://commons.wikimedia.org/wiki/File:Neuron_Hand-tuned.svg), Quasar Jarosz, CC BY-SA 3.0.
 - Синапс: [SynapseSchematic unlabeled.svg](https://commons.wikimedia.org/wiki/File:SynapseSchematic_unlabeled.svg), Thomas Splettstoesser (scistyle.com), CC BY-SA 4.0.
+- Ухо: [Anatomy of the Human Ear.svg](https://commons.wikimedia.org/wiki/File:Anatomy_of_the_Human_Ear.svg), Lars Chittka, Axel Brockmann, CC BY 2.5. Подписи убраны.
+- Срез мозга: [Brain human sagittal section.svg](https://commons.wikimedia.org/wiki/File:Brain_human_sagittal_section.svg), Patrick J. Lynch, CC BY 2.5.
 
-Перекрашенные версии этих двух иллюстраций (`js/art-cells.js`) распространяются по той же лицензии CC BY-SA.
+Все иллюстрации перекрашены под тему сайта. Перекрашенные нейрон и синапс (`js/art-cells.js`) распространяются по той же лицензии CC BY-SA.

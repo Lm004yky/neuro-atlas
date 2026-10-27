@@ -8,21 +8,23 @@ NA.register({
     {
       title: ["Путь звука через ухо", "Sound’s journey through the ear"],
       html: () => `<div class="split"><div class="stage">
-        <svg viewBox="0 0 640 250" role="img">
-          <ellipse cx="292" cy="140" rx="46" ry="52" fill="var(--bg)" stroke="var(--line)" stroke-dasharray="4 3"/>
-          <g class="ep" data-e="pinna"><path d="M104,40 C40,26 8,96 28,152 C42,196 78,228 106,218 C92,192 86,172 102,152 L102,118 C90,96 92,70 104,40 Z" fill="var(--tissue)" stroke="var(--tissue-edge)" stroke-width="2"/></g>
-          <g class="ep" data-e="canal"><rect x="102" y="122" width="148" height="30" fill="var(--tissue-2)" stroke="var(--tissue-edge)" stroke-width="1.5"/></g>
-          <g class="waves" fill="none" stroke="var(--eosin)" stroke-width="3" stroke-linecap="round" opacity="0"><path d="M0,-12 C5,-6 5,6 0,12"/><path d="M-14,-12 C-9,-6 -9,6 -14,12"/><path d="M-28,-12 C-23,-6 -23,6 -28,12"/></g>
-          <g class="ep" data-e="drum"><ellipse class="drum" cx="254" cy="137" rx="5" ry="30" fill="var(--eosin)"/></g>
-          <g class="ep oss" data-e="oss" fill="none" stroke="var(--myelin)" stroke-width="7" stroke-linecap="round"><path d="M260,118 L284,126"/><path d="M284,126 L302,142"/><path d="M302,142 L322,146"/><path d="M322,138 L322,154" stroke-width="5"/><rect x="262" y="112" width="70" height="50" fill="transparent" stroke="none"/></g>
-          <g class="ep" data-e="canals" fill="none" stroke="var(--tissue-edge)" stroke-width="6"><path d="M350,105 C335,60 375,45 385,85"/><path d="M372,98 C380,48 425,55 405,100"/><path d="M395,108 C430,85 440,120 410,125"/></g>
-          <g class="ep" data-e="coch"><path class="coch" d="M326,146 C330,96 410,82 432,122 C452,162 402,184 380,152 C364,128 396,112 406,134 C412,148 398,152 395,142" fill="none" stroke="var(--calm)" stroke-width="13" stroke-linecap="round"/></g>
-          <g class="ep" data-e="nerve"><path d="M432,140 L610,140" stroke="var(--hema)" stroke-width="7" stroke-linecap="round"/><rect x="432" y="128" width="180" height="24" fill="transparent"/></g>
-          <circle class="np2" cx="440" cy="140" r="8" fill="var(--myelin)" opacity="0"/>
-          <text class="lbl" x="20" y="242">${NA.t(["наружное ухо", "outer ear"])}</text><text class="lbl" x="255" y="210">${NA.t(["среднее", "middle"])}</text><text class="lbl" x="350" y="210">${NA.t(["внутреннее ухо", "inner ear"])}</text><text class="lbl" x="520" y="128">${NA.t(["→ в мозг", "→ to brain"])}</text>
+        <svg viewBox="0 10 660 490" role="img" class="art-cell ear-art">
+          <g class="art">${NA.art.ear}</g>
+          <g class="ep hz" data-e="pinna"><ellipse cx="85" cy="255" rx="68" ry="215"/></g>
+          <g class="ep hz" data-e="canal"><rect x="150" y="276" width="200" height="50" rx="10"/></g>
+          <g class="ep hz" data-e="drum"><ellipse cx="373" cy="305" rx="16" ry="36"/></g>
+          <g class="ep hz" data-e="oss"><rect x="340" y="205" width="110" height="68" rx="12"/></g>
+          <g class="ep hz" data-e="canals"><ellipse cx="440" cy="196" rx="48" ry="52"/></g>
+          <g class="ep hz" data-e="coch"><circle cx="495" cy="291" r="46"/></g>
+          <g class="ep hz" data-e="nerve"><path d="M535,262 L640,238 L646,276 L540,302 Z"/></g>
+          <g class="waves" opacity="0"><path class="wv" d="M0,-18 C8,-9 8,9 0,18"/><path class="wv" d="M-16,-18 C-8,-9 -8,9 -16,18"/><path class="wv" d="M-32,-18 C-24,-9 -24,9 -32,18"/></g>
+          <ellipse class="glow drum" cx="373" cy="305" rx="12" ry="34"/><rect class="glow oss" x="345" y="212" width="100" height="56" rx="12"/><circle class="glow coch" cx="495" cy="291" r="42"/>
+          <circle class="np2 pulse" cx="540" cy="282" r="8" opacity="0"/>
+          <text class="lbl" x="150" y="372">${NA.t(["наружное ухо", "outer ear"])}</text><text class="lbl" x="250" y="200">${NA.t(["среднее ухо", "middle ear"])}</text><text class="lbl" x="470" y="380">${NA.t(["внутреннее ухо", "inner ear"])}</text><text class="lbl" x="560" y="225">${NA.t(["→ в мозг", "→ to brain"])}</text>
         </svg>
         <div class="row"><button class="btn go">${NA.t(["▶ Пустить звук в ухо", "▶ Send a sound in"])}</button><span class="tip">${NA.t(["или нажмите на часть уха", "or click a part of the ear"])}</span></div>
-        <p class="caption cap"></p></div>
+        <p class="caption cap"></p>
+        <p class="credit tip">${NA.t(["Иллюстрация", "Illustration"])}: Lars Chittka, Axel Brockmann, <a href="https://commons.wikimedia.org/wiki/File:Anatomy_of_the_Human_Ear.svg" target="_blank" rel="noopener">CC BY 2.5</a></p></div>
         <article class="card info" aria-live="polite"></article></div>`,
       init(root) {
         const E = {
@@ -50,13 +52,13 @@ NA.register({
             const p = Math.min(1, (now - t0) / T), s = p < .35 ? 0 : p < .5 ? 1 : p < .75 ? 2 : 3;
             if (s !== stage) { stage = s; cap.textContent = NA.t(stages[s][1]); show(stages[s][0]) }
             if (!NA.still) {
-              waves.setAttribute("opacity", p < .37 ? 1 : 0); waves.setAttribute("transform", `translate(${40 + Math.min(1, p / .35) * 208},137)`);
+              waves.setAttribute("opacity", p < .37 ? 1 : 0); waves.setAttribute("transform", `translate(${40 + Math.min(1, p / .35) * 318},301)`);
               const vib = p >= .35 && p < .55 ? Math.sin(now / 25) * 3 : 0;
-              drum.setAttribute("rx", 5 + Math.abs(vib)); oss.setAttribute("transform", `translate(${vib},0)`);
-              coch.style.stroke = p >= .5 && p < .8 ? "var(--eosin)" : "";
-              const k = (p - .75) / .25; np.setAttribute("opacity", k > 0 && k < 1 ? 1 : 0); np.setAttribute("cx", 440 + Math.max(0, k) * 165);
+              drum.style.opacity = oss.style.opacity = vib ? 1 : 0; drum.setAttribute("transform", `translate(${vib},0)`); oss.setAttribute("transform", `translate(${vib},0)`);
+              coch.style.opacity = p >= .5 && p < .8 ? .5 + .5 * Math.sin(now / 90) : 0;
+              const k = (p - .75) / .25; np.setAttribute("opacity", k > 0 && k < 1 ? 1 : 0); np.setAttribute("cx", 540 + Math.max(0, k) * 100); np.setAttribute("cy", 282 - Math.max(0, k) * 24);
             }
-            if (p < 1) requestAnimationFrame(frame); else { busy = false; waves.setAttribute("opacity", 0); np.setAttribute("opacity", 0); coch.style.stroke = "" }
+            if (p < 1) requestAnimationFrame(frame); else { busy = false; waves.setAttribute("opacity", 0); np.setAttribute("opacity", 0); coch.style.opacity = drum.style.opacity = oss.style.opacity = 0 }
           })(t0);
         };
       }
